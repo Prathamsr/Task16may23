@@ -94,51 +94,57 @@
       </div>
       <div class="message"></div>
     </div>
-
+    <script
+    type="text/javascript"
+    src="jquery.js"
+  ></script>
     <script
       type="text/javascript"
-      src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"
+      src="jq.js"
     ></script>
+    
     <script
       type="text/javascript"
-      src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="http://cdnjs.cloudflare.com/ajax/libs/jsPlumb/1.4.1/jquery.jsPlumb-1.4.1-all.js"
+      src="plum.js"
     ></script>
 
     <script type="text/javascript">
       var choice = [];
       var answers = [];
+      let A=document.getElementById("A")
+      let B=document.getElementById("B")
+      let C=document.getElementById("C")
+      let D=document.getElementById("D")
+      let E=document.getElementById("E")
+      let F=document.getElementById("F")
 
       jsPlumb.ready(function () {
-        var a = jsPlumb.addEndpoint("A", {
+        var a = jsPlumb.addEndpoint(A, {
           anchor: "Center",
           isSource: true,
           connectionsDetachable: false,
         });
-        var b = jsPlumb.addEndpoint("B", {
+        var b = jsPlumb.addEndpoint(B, {
           anchor: "Center",
           isSource: true,
           connectionsDetachable: false,
         });
-        var c = jsPlumb.addEndpoint("C", {
+        var c = jsPlumb.addEndpoint(C, {
           anchor: "Center",
           isSource: true,
           connectionsDetachable: false,
         });
-        var d = jsPlumb.addEndpoint("D", {
+        var d = jsPlumb.addEndpoint(D, {
           anchor: "Center",
           isTarget: true,
           connectionsDetachable: false,
         });
-        var e = jsPlumb.addEndpoint("E", {
+        var e = jsPlumb.addEndpoint(E, {
           anchor: "Center",
           isTarget: true,
           connectionsDetachable: false,
         });
-        var f = jsPlumb.addEndpoint("F", {
+        var f = jsPlumb.addEndpoint(F, {
           anchor: "Center",
           isTarget: true,
           connectionsDetachable: false,
