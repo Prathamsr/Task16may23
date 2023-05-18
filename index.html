@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 500px;
+      }
+      .main {
+        background-color: rgba(234, 65, 65, 0.369);
+        padding: 15px;
+      }
+      .container {
+        display: grid;
+        grid-template-columns: 35% 30% 35%;
+        grid-template-rows: 100%;
+        width: 450px;
+        height: 100px;
+      }
+      .element {
+        display: flex;
+        height: 30px;
+        width: 30px;
+      }
+      .point {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .name {
+        padding: 20px;
+        margin: 0px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .control {
+        display: flex;
+        width: 370px;
+        justify-content: space-around;
+        padding: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main" id="container">
+      <div class="container">
+        <div class="col1">
+          <div class="element">
+            <div class="name">A</div>
+            <div class="point" id="A"></div>
+          </div>
+          <div class="element">
+            <div class="name">B</div>
+            <div class="point" id="B"></div>
+          </div>
+          <div class="element">
+            <div class="name">C</div>
+            <div class="point" id="C"></div>
+          </div>
+        </div>
+        <div class="clo3">
+          <div class="blank"></div>
+        </div>
+        <div class="col2">
+          <div class="element">
+            <div class="point" id="D"></div>
+            <div class="name">D</div>
+          </div>
+          <div class="element">
+            <div class="point" id="E"></div>
+            <div class="name">E</div>
+          </div>
+          <div class="element">
+            <div class="point" id="F"></div>
+            <div class="name">F</div>
+          </div>
+        </div>
+      </div>
+      <div class="control">
+        <div class="con">
+          <button id="check">Check</button>
+        </div>
+        <div class="con">
+          <button id="reset">Reset</button>
+        </div>
+      </div>
+      <div class="message"></div>
+    </div>
+
+    <script
+      type="text/javascript"
+      src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="http://cdnjs.cloudflare.com/ajax/libs/jsPlumb/1.4.1/jquery.jsPlumb-1.4.1-all.js"
+    ></script>
+
+    <script type="text/javascript">
+      var choice = [];
+      var answers = [];
+
+      jsPlumb.ready(function () {
+        var a = jsPlumb.addEndpoint("A", {
+          anchor: "Center",
+          isSource: true,
+          connectionsDetachable: false,
+        });
+        var b = jsPlumb.addEndpoint("B", {
+          anchor: "Center",
+          isSource: true,
+          connectionsDetachable: false,
+        });
+        var c = jsPlumb.addEndpoint("C", {
+          anchor: "Center",
+          isSource: true,
+          connectionsDetachable: false,
+        });
+        var d = jsPlumb.addEndpoint("D", {
+          anchor: "Center",
+          isTarget: true,
+          connectionsDetachable: false,
+        });
+        var e = jsPlumb.addEndpoint("E", {
+          anchor: "Center",
+          isTarget: true,
+          connectionsDetachable: false,
+        });
+        var f = jsPlumb.addEndpoint("F", {
+          anchor: "Center",
+          isTarget: true,
+          connectionsDetachable: false,
+        });
+        a.bind("mousedown", () => {
+          for (var ele of answers) {
+            if (ele[0] == "A") {
+              return;
+            }
+          }
+          choice.push("A");
+        });
+        b.bind("mousedown", () => {
+          for (var ele of answers) {
+            if (ele[0] == "B") {
+              return;
+            }
+          }
+          choice.push("B");
+        });
+        c.bind("mousedown", () => {
+          for (var ele of answers) {
+            if (ele[0] == "C") {
+              return;
+            }
+          }
+          choice.push("C");
+        });
+        d.bind("mouseup", () => {
+          if (choice.length == 1) {
+            choice.push("D");
+            answers.push(choice);
+            choice = [];
+          }
+        });
+        e.bind("mouseup", () => {
+          if (choice.length == 1) {
+            choice.push("E");
+            answers.push(choice);
+            choice = [];
+          }
+        });
+        f.bind("mouseup", () => {
+          if (choice.length == 1) {
+            choice.push("F");
+            answers.push(choice);
+            choice = [];
+            console.log(answers);
+            jsPlumb.deleteEveryConnection();
+          }
+        });
+      });
+      var cont = document.getElementById("container");
+      cont.addEventListener("mouseup", () => {
+        choice = [];
+      });
+      var check = document.getElementById("check");
+      check.addEventListener("mousedown", () => {
+        var correct = [
+          ["A", "D"],
+          ["B", "E"],
+          ["C", "F"],
+        ];
+
+        const isCorrect = correct.every((correctItem) =>
+          answers.some(
+            (answerItem) => answerItem.toString() === correctItem.toString()
+          )
+        );
+
+        if (isCorrect) {
+          alert("Right Connection");
+        } else {
+          alert("Wrong Connection");
+        }
+      });
+
+      var reset = document.getElementById("reset");
+      reset.addEventListener("mousedown", () => {
+        jsPlumb.detachEveryConnection();
+        answers = [];
+        choice = [];
+      });
+    </script>
+  </body>
+</html>
