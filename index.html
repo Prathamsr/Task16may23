@@ -94,29 +94,20 @@
       </div>
       <div class="message"></div>
     </div>
-    <script
-    type="text/javascript"
-    src="jquery.js"
-  ></script>
-    <script
-      type="text/javascript"
-      src="jq.js"
-    ></script>
-    
-    <script
-      type="text/javascript"
-      src="plum.js"
-    ></script>
+    <script type="text/javascript" src="node_modules\jquery.js"></script>
+    <script type="text/javascript" src="node_modules\jq.js"></script>
+
+    <script type="text/javascript" src="node_modules\plum.js"></script>
 
     <script type="text/javascript">
       var choice = [];
       var answers = [];
-      let A=document.getElementById("A")
-      let B=document.getElementById("B")
-      let C=document.getElementById("C")
-      let D=document.getElementById("D")
-      let E=document.getElementById("E")
-      let F=document.getElementById("F")
+      let A = document.getElementById("A");
+      let B = document.getElementById("B");
+      let C = document.getElementById("C");
+      let D = document.getElementById("D");
+      let E = document.getElementById("E");
+      let F = document.getElementById("F");
 
       jsPlumb.ready(function () {
         var a = jsPlumb.addEndpoint(A, {
