@@ -192,22 +192,28 @@
       });
       var check = document.getElementById("check");
       check.addEventListener("mousedown", () => {
-        var correct = [
-          ["A", "D"],
-          ["B", "E"],
-          ["C", "F"],
-        ];
+        if (answers.length == 0) {
+          alert("No Connection made");
+        } else if (answers.length == 3) {
+          var correct = [
+            ["A", "D"],
+            ["B", "E"],
+            ["C", "F"],
+          ];
 
-        const isCorrect = correct.every((correctItem) =>
-          answers.some(
-            (answerItem) => answerItem.toString() === correctItem.toString()
-          )
-        );
+          const isCorrect = correct.every((correctItem) =>
+            answers.some(
+              (answerItem) => answerItem.toString() === correctItem.toString()
+            )
+          );
 
-        if (isCorrect) {
-          alert("Right Connection");
+          if (isCorrect) {
+            alert("Right Connection");
+          } else {
+            alert("Wrong Connection");
+          }
         } else {
-          alert("Wrong Connection");
+          alert("Incomplete Connection");
         }
       });
 
