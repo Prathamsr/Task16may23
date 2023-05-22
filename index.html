@@ -102,6 +102,7 @@
     <script type="text/javascript">
       var choice = [];
       var answers = [];
+      var not = [];
       let A = document.getElementById("A");
       let B = document.getElementById("B");
       let C = document.getElementById("C");
@@ -113,45 +114,54 @@
         var a = jsPlumb.addEndpoint(A, {
           anchor: "Center",
           isSource: true,
-          connectionsDetachable: false,
         });
         var b = jsPlumb.addEndpoint(B, {
           anchor: "Center",
           isSource: true,
-          connectionsDetachable: false,
         });
         var c = jsPlumb.addEndpoint(C, {
           anchor: "Center",
           isSource: true,
-          connectionsDetachable: false,
         });
         var d = jsPlumb.addEndpoint(D, {
           anchor: "Center",
           isTarget: true,
-          connectionsDetachable: false,
         });
         var e = jsPlumb.addEndpoint(E, {
           anchor: "Center",
           isTarget: true,
-          connectionsDetachable: false,
         });
         var f = jsPlumb.addEndpoint(F, {
           anchor: "Center",
           isTarget: true,
-          connectionsDetachable: false,
         });
         a.bind("mousedown", () => {
           for (var ele of answers) {
             if (ele[0] == "A") {
-              return;
+              for (var ee of answers) {
+                if (ee != ele) {
+                  not.push(ee);
+                  
+                }
+              }
+              answers = not;
+              not = [];
             }
+            console.log(ele);
           }
+
           choice.push("A");
         });
         b.bind("mousedown", () => {
           for (var ele of answers) {
             if (ele[0] == "B") {
-              return;
+              for (var ee of answers) {
+                if (ee != ele) {
+                  not.push(ee);
+                }
+              }
+              answers = not;
+              not = [];
             }
           }
           choice.push("B");
@@ -159,7 +169,13 @@
         c.bind("mousedown", () => {
           for (var ele of answers) {
             if (ele[0] == "C") {
-              return;
+              for (var ee of answers) {
+                if (ee != ele) {
+                  not.push(ee);
+                }
+              }
+              answers = not;
+              not = [];
             }
           }
           choice.push("C");
@@ -184,6 +200,11 @@
             answers.push(choice);
             choice = [];
           }
+        });
+        jsPlumb.bind("dblclick", function (conn) {
+          jsPlumb.detach(conn);
+          console.log(conn);
+          return false;
         });
       });
       var cont = document.getElementById("container");
@@ -210,7 +231,7 @@
           if (isCorrect) {
             alert("Right Connection");
           } else {
-            alert("Wrong Connection");
+            alert("Wrong or Incomplete Connection");
           }
         } else {
           alert("Incomplete Connection");
